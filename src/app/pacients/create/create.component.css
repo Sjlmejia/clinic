@@ -1,0 +1,17 @@
+.container-pacient {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.save {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  width: 40%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}

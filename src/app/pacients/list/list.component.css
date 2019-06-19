@@ -1,0 +1,19 @@
+.pacient, .container{
+  display: flex;
+  flex: 1;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.titles {
+  display: flex
+}
+
+.container{
+  margin-top:10px;
+  flex-direction: column;
+}

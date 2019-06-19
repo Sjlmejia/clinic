@@ -1,0 +1,38 @@
+<mat-card class="container-pacient">
+  <mat-card-title>Nuevo Paciente</mat-card-title>
+  <form (submit) = "onAddPacient(pacientForm)" #pacientForm="ngForm" class="form">
+    <mat-form-field>
+      <input matInput placeholder="Nombres" name="firstName"
+        ngModel required #firstName="ngModel">
+      <mat-error>Por favor ingrese un Nombre</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Apellidos" name="lastName"
+        ngModel required #lastName="ngModel">
+        <mat-error>Por favor ingrese Apellidos</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Estatura" name="heightPacient" ngModel>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Peso" name="weightPacient" ngModel>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Sexo" name="sexType" ngModel #sexType="ngModel">
+      <mat-error>Por Favor Ingrese el Sexo</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Grupo Sanguineo" name="bloodType" ngModel>
+    </mat-form-field>
+    <mat-form-field>
+     <input matInput placeholder="Cedula de Identidad" name="dni" ngModel #dni="ngModel">
+     <mat-error>Por Favor Ingrese la cédula de indentidad</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput  name="date"  ngModel [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button class="save" mat-raised-button type="submit">Guardar Paciente</button>
+  </form>
+</mat-card>
