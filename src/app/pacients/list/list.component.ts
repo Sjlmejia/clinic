@@ -25,4 +25,8 @@ export class ListComponent implements OnInit, OnDestroy{
   ngOnDestroy(){
     this.pacientsSub.unsubscribe();
   }
+
+  onDelete(pacientId:string){
+    this.pacientsService.deletePacient(pacientId);
+  }
 }
