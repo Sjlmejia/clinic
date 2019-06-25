@@ -29,7 +29,19 @@ export  class CreateComponent implements OnInit {
       if(paramMap.has('id')) {
         this.mode = 'edit';
         this.id = paramMap.get('id');
-        this.pacient = this.pacientsService.getPacient(this.id);
+        this.pacientsService.getPacient(this.id).subscribe(data =>{
+          this.pacient = {
+            id: data._id,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            heightPacient: data.heightPacient,
+            weightPacient: data.weightPacient,
+            bloodType: data.bloodType,
+            sexType: data.sexType,
+            dni: data.dni,
+            date: data.date
+          }
+        });
       } else {
         this.mode = 'create';
         this.id = null;

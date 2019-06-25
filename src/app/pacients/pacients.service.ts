@@ -64,7 +64,15 @@ export class PacientsService {
       });
   }
   getPacient(id:string) {
-    return {...this.pacients.find(obj => obj.id === id)}
+    return this.http.get<{_id:string;
+    firstName: string;
+    lastName: string;
+    heightPacient: string;
+    weightPacient: string;
+    bloodType: string;
+    sexType:string;
+    dni:string;
+    date:string}>( 'http://localhost:3000/api/pacients/'+id );
   }
 
   updatePacient( id:string, firstName:string,
@@ -84,7 +92,13 @@ export class PacientsService {
       }
 
       this.http.put('http://localhost:3000/api/pacients/'+id, pacient)
-        .subscribe(res => console.log(res));
+        .subscribe(res => {
+          const updatePacients = [...this.pacients];
+          const oldPacientIndex = updatePacients.findIndex(obj => obj.id ===pacient.id);
+          updatePacients[oldPacientIndex] = pacient;
+          this.pacients = updatePacients;
+          this.pacientsUpdated.next([...this.pacients]);
+        });
     }
   deletePacient(id:string){
     this.http.delete('http://localhost:3000/api/pacients/' + id)
