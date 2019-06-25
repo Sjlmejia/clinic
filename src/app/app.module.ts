@@ -8,7 +8,8 @@ import { MatInputModule,
          MatToolbarModule,
          MatNativeDateModule,
          MatDatepickerModule,
-         MatDividerModule } from '@angular/material';
+         MatDividerModule,
+         MatProgressSpinnerModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatDatepickerModule,
     MatNativeDateModule,
     MatDividerModule,
+    MatProgressSpinnerModule,
     HttpClientModule
   ],
   providers: [],

@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { last } from '@angular/router/src/utils/collection';
+import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class PacientsService {
   private pacients: Pacient[] = [];
   private pacientsUpdated = new Subject<Pacient[]>();
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private router:Router){}
 
   getPacients () {
     this.http.get<{message: string, pacients: any}>(
@@ -40,6 +40,7 @@ export class PacientsService {
   getPacientUpdateListener() {
     return this.pacientsUpdated.asObservable();
   }
+
   addPacient(firstName: string, lastName:string, heightPacient:string,
     weightPacient:string,
     bloodType:string,
@@ -61,8 +62,10 @@ export class PacientsService {
         pacient.id = id;
         this.pacients.push(pacient);
         this.pacientsUpdated.next([...this.pacients]);
+        this.router.navigate(['/']);
       });
   }
+
   getPacient(id:string) {
     return this.http.get<{_id:string;
     firstName: string;
@@ -98,6 +101,7 @@ export class PacientsService {
           updatePacients[oldPacientIndex] = pacient;
           this.pacients = updatePacients;
           this.pacientsUpdated.next([...this.pacients]);
+          this.router.navigate(['/']);
         });
     }
   deletePacient(id:string){

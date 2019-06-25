@@ -10,14 +10,17 @@ import { from } from 'rxjs';
 })
 export class ListComponent implements OnInit, OnDestroy{
   pacients:Pacient[] = [];
+  isLoading = false;
   private pacientsSub : Subscription;
 
   constructor(public pacientsService:PacientsService){}
 
   ngOnInit(){
+    this.isLoading = true;
     this.pacientsService.getPacients();
     this.pacientsSub = this.pacientsService.getPacientUpdateListener()
       	.subscribe((pacients:Pacient[]) =>{
+          this.isLoading = false;
           this.pacients = pacients;
         });
   }

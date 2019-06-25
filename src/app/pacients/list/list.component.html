@@ -1,6 +1,5 @@
-
-
-<div class="container" *ngIf="pacients.length > 0">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="container" *ngIf="pacients.length > 0 && !isLoading">
   <div class="titles">
     <div class="content">
       Nombres

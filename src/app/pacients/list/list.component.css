@@ -13,7 +13,11 @@
   display: flex
 }
 
-.container{
+.container {
   margin-top:10px;
   flex-direction: column;
+}
+
+mat-spinner {
+ margin: auto;
 }

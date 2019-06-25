@@ -19,6 +19,7 @@ export  class CreateComponent implements OnInit {
   dni:string;
   date = '';
   pacient: Pacient;
+  isLoading = false;
 
   private id:string;
   private mode = 'create';
@@ -29,7 +30,9 @@ export  class CreateComponent implements OnInit {
       if(paramMap.has('id')) {
         this.mode = 'edit';
         this.id = paramMap.get('id');
+        this.isLoading = true;
         this.pacientsService.getPacient(this.id).subscribe(data =>{
+          this.isLoading = false;
           this.pacient = {
             id: data._id,
             firstName: data.firstName,
@@ -53,6 +56,7 @@ export  class CreateComponent implements OnInit {
     if(form.invalid){
       return;
     }
+    this.isLoading = true;
     if( this.mode ==='create' ) {
       this.pacientsService.addPacient(form.value.firstName,
         form.value.lastName, form.value.heightPacient, form.value.weightPacient,form.value.bloodType,
