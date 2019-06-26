@@ -16,6 +16,7 @@ export  class CreateComponent implements OnInit {
 
   private id:string;
   private mode = 'create';
+  title = 'Nuevo Paciente';
   constructor(public pacientsService:PacientsService, public route: ActivatedRoute){}
 
   ngOnInit() {
@@ -38,6 +39,7 @@ export  class CreateComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap: ParamMap)=>{
       if(paramMap.has('id')) {
         this.mode = 'edit';
+        this.title = 'Editar Paciente'
         this.id = paramMap.get('id');
         this.isLoading = true;
         this.pacientsService.getPacient(this.id).subscribe(data =>{

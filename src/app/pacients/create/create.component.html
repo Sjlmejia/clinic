@@ -1,7 +1,7 @@
 <mat-card class="container-pacient">
   <mat-spinner *ngIf="isLoading">
   </mat-spinner>
-  <mat-card-title *ngIf="!isLoading">Nuevo Paciente</mat-card-title>
+  <mat-card-title *ngIf="!isLoading">{{title}}</mat-card-title>
   <form [formGroup]="form" (submit) = "onSavePacient()" class="form" *ngIf="!isLoading">
     <mat-form-field>
       <input matInput placeholder="Nombres" formControlName="firstName" autocomplete="off">
@@ -33,6 +33,6 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <button class="save" mat-raised-button type="submit">Guardar Paciente</button>
+    <button class="save" mat-stroked-button type="submit">Guardar Paciente</button>
   </form>
 </mat-card>
