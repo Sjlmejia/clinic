@@ -2,36 +2,34 @@
   <mat-spinner *ngIf="isLoading">
   </mat-spinner>
   <mat-card-title *ngIf="!isLoading">Nuevo Paciente</mat-card-title>
-  <form (submit) = "onSavePacient(pacientForm)" #pacientForm="ngForm" class="form" *ngIf="!isLoading">
+  <form [formGroup]="form" (submit) = "onSavePacient()" class="form" *ngIf="!isLoading">
     <mat-form-field>
-      <input matInput placeholder="Nombres" name="firstName" autocomplete="off"
-        [ngModel]="pacient?.firstName" required #firstName="ngModel">
-      <mat-error>Por favor ingrese un Nombre</mat-error>
+      <input matInput placeholder="Nombres" formControlName="firstName" autocomplete="off">
+      <mat-error *ngIf="form.get('firstName').invalid">Por favor ingrese un Nombre</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Apellidos" name="lastName"
-        [ngModel]="pacient?.lastName" required #lastName="ngModel">
-        <mat-error>Por favor ingrese Apellidos</mat-error>
+      <input matInput placeholder="Apellidos" formControlName="lastName" autocomplete="off">
+        <mat-error *ngIf="form.get('lastName').invalid">Por favor ingrese Apellidos</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Estatura" name="heightPacient" [ngModel]="pacient?.heightPacient">
+      <input matInput placeholder="Estatura" formControlName="heightPacient">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Peso" name="weightPacient" [ngModel]="pacient?.weightPacient">
+      <input matInput placeholder="Peso" formControlName="weightPacient">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Sexo" name="sexType" [ngModel]="pacient?.sexType" #sexType="ngModel">
+      <input matInput placeholder="Sexo" formControlName="sexType">
       <mat-error>Por Favor Ingrese el Sexo</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Grupo Sanguineo" name="bloodType" [ngModel]="pacient?.bloodType">
+      <input matInput placeholder="Grupo Sanguineo" formControlName="bloodType">
     </mat-form-field>
     <mat-form-field>
-     <input matInput placeholder="Cedula de Identidad" name="dni" [ngModel]="pacient?.dni" #dni="ngModel">
+     <input matInput placeholder="Cedula de Identidad" formControlName="dni">
      <mat-error>Por Favor Ingrese la cédula de indentidad</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput  name="date"  [ngModel]="pacient?.date" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
+      <input matInput  formControlName="date" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
