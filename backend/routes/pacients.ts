@@ -19,6 +19,11 @@ router.post('',(req,res,next)=>{
       message: 'Paciente creado',
       id : data._id
     });
+  })
+  .catch(error =>{
+    res.status(500).json({
+      message: 'error al crear el paciente'
+    });
   });
 });
 

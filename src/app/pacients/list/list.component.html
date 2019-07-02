@@ -21,3 +21,4 @@
     </div>
   </div>
 </div>
+<mat-paginator [length]="totalPacients" [pageSize]="itemsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator>

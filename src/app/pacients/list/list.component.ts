@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Pacient } from '../pacient.model';
 import { PacientsService } from '../pacients.service';
 import { from } from 'rxjs';
+import { PageEvent } from '@angular/material';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -11,6 +12,9 @@ import { from } from 'rxjs';
 export class ListComponent implements OnInit, OnDestroy{
   pacients:Pacient[] = [];
   isLoading = false;
+  totalPacients = 10;
+  itemsPerPage = 5;
+  pageSizeOptions = [1,5,10];
   private pacientsSub : Subscription;
 
   constructor(public pacientsService:PacientsService){}
@@ -27,6 +31,10 @@ export class ListComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(){
     this.pacientsSub.unsubscribe();
+  }
+
+  onPageChanged(pageData: PageEvent){
+    console.log(pageData);
   }
 
   onDelete(pacientId:string){
