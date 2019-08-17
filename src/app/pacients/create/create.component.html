@@ -33,6 +33,13 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    <div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()">Cargar Imagen</button>
+      <input type="file" #filePicker  (change)="onImagePicked($event)">
+    </div>
+    <div class="image-preview"  *ngIf="imagePreview !== ''  && imagePreview">
+      <img id="blah" [src]="imagePreview" alt="form.value.image.name" />
+    </div>
     <button class="save" mat-stroked-button type="submit">Guardar Paciente</button>
   </form>
 </mat-card>

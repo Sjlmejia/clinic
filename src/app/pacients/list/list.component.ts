@@ -14,6 +14,7 @@ export class ListComponent implements OnInit, OnDestroy{
   isLoading = false;
   totalPacients = 10;
   itemsPerPage = 5;
+  currentPage = 1;
   pageSizeOptions = [1,5,10];
   private pacientsSub : Subscription;
 
@@ -21,7 +22,7 @@ export class ListComponent implements OnInit, OnDestroy{
 
   ngOnInit(){
     this.isLoading = true;
-    this.pacientsService.getPacients();
+    this.pacientsService.getPacients(this.itemsPerPage, this.currentPage);
     this.pacientsSub = this.pacientsService.getPacientUpdateListener()
       	.subscribe((pacients:Pacient[]) =>{
           this.isLoading = false;
@@ -34,7 +35,10 @@ export class ListComponent implements OnInit, OnDestroy{
   }
 
   onPageChanged(pageData: PageEvent){
-    console.log(pageData);
+    this.currentPage = pageData.pageIndex +1;
+    this.itemsPerPage = pageData.pageSize;
+    console.log(this.currentPage);
+    this.pacientsService.getPacients(this.itemsPerPage, this.currentPage);
   }
 
   onDelete(pacientId:string){

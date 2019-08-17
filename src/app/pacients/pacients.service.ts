@@ -10,12 +10,12 @@ export class PacientsService {
   private pacients: Pacient[] = [];
   private pacientsUpdated = new Subject<Pacient[]>();
 
-  constructor(private http: HttpClient, private router:Router){}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  getPacients () {
+  getPacients(itemsPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${itemsPerPage}&page=${currentPage}`;
     this.http.get<{message: string, pacients: any}>(
-      'http://localhost:3000/api/pacients'
-      )
+      'http://localhost:3000/api/pacients' + queryParams )
       .pipe(map((pacientsData) =>{
         return pacientsData.pacients.map(pacient =>{
           return {

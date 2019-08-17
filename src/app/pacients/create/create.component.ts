@@ -13,28 +13,27 @@ export  class CreateComponent implements OnInit {
   pacient: Pacient;
   form: FormGroup;
   isLoading = false;
-
-  private id:string;
+  imagePreview: any;
+  private id: string;
   private mode = 'create';
   title = 'Nuevo Paciente';
-  constructor(public pacientsService:PacientsService, public route: ActivatedRoute){}
+  constructor(public pacientsService: PacientsService, public route: ActivatedRoute){}
 
   ngOnInit() {
     this.form = new FormGroup({
-      'firstName': new FormControl(null,{
+      firstName: new FormControl(null, {
         validators: [Validators.required]
       }),
-      'lastName': new FormControl(null,{
+      lastName: new FormControl(null, {
         validators: [Validators.required]
       }),
-      'heightPacient': new FormControl(null,{}),
-      'weightPacient': new FormControl(null,{}),
-      'bloodType':new FormControl(null,{}),
-      'sexType': new FormControl(null,{
-      }),
-      'dni': new FormControl(null,{
-      }),
-      'date': new FormControl(null,{})
+      heightPacient: new FormControl(null, {}),
+      weightPacient: new FormControl(null, {}),
+      bloodType: new FormControl(null, {}),
+      sexType: new FormControl(null, {}),
+      dni: new FormControl(null, {}),
+      date: new FormControl(null, {}),
+      image: new FormControl(null, {})
     });
     this.route.paramMap.subscribe((paramMap: ParamMap)=>{
       if(paramMap.has('id')) {
@@ -71,6 +70,19 @@ export  class CreateComponent implements OnInit {
         this.id = null;
       }
     });
+  }
+  onImagePicked(event: any) {
+    const file = event.target.files[0];
+    this.form.patchValue({image: file});
+    this.form.get('image').updateValueAndValidity();
+    console.log(this.form);
+    if (event.target.files && file) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+       this.imagePreview = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
   onSavePacient() {
     console.log('se guardo');

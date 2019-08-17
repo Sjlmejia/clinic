@@ -45,7 +45,16 @@ router.put('/:id',(req,res,next)=>{
 });
 
 router.get('',(req, res,next)=>{
-  Pacient.find().then(documents =>{
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  const postQuery = Pacient.find();
+  console.log('tessss', pageSize, currentPage);
+  if (pageSize && currentPage) {
+    postQuery
+      .skip(pageSize * (currentPage -1))
+      .limit(pageSize);
+  }
+  postQuery.then(documents =>{
     res.status(200).json({
       message:"OK",
       pacients: documents

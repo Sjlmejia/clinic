@@ -19,7 +19,7 @@ import { HeaderComponent } from './header/header.component'
 import { ListComponent } from './pacients/list/list.component'
 import { from } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ErrorInterceptor } from './error-interceptor';
+// import { ErrorInterceptor } from './error-interceptor';
 
 @NgModule({
   declarations: [
@@ -44,9 +44,7 @@ import { ErrorInterceptor } from './error-interceptor';
     MatPaginatorModule,
     HttpClientModule
   ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi: true},
-  ],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
