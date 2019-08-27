@@ -16,22 +16,22 @@ export class PacientsService {
     const queryParams = `?pagesize=${itemsPerPage}&page=${currentPage}`;
     this.http.get<{message: string, pacients: any}>(
       'http://localhost:3000/api/pacients' + queryParams )
-      .pipe(map((pacientsData) =>{
-        return pacientsData.pacients.map(pacient =>{
+      .pipe(map((pacientsData) => {
+        return pacientsData.pacients.map(pacient => {
           return {
-            id:pacient._id,
-            firstName:pacient.firstName,
-            lastName:pacient.lastName,
-            heightPacient:pacient.heightPacient,
-            weightPacient:pacient.weightPacient,
-            bloodType:pacient.bloodType,
-            sexType:pacient.sexType,
-            dni:pacient.dni,
-            date:pacient.date
-          }
-        })
+            id: pacient._id,
+            firstName: pacient.firstName,
+            lastName: pacient.lastName,
+            heightPacient: pacient.heightPacient,
+            weightPacient: pacient.weightPacient,
+            bloodType: pacient.bloodType,
+            sexType: pacient.sexType,
+            dni: pacient.dni,
+            date: pacient.date
+          };
+        });
       }))
-      .subscribe(transformedPacients =>{
+      .subscribe(transformedPacients => {
         this.pacients = transformedPacients;
         this.pacientsUpdated.next([...this.pacients]);
       });
@@ -41,23 +41,23 @@ export class PacientsService {
     return this.pacientsUpdated.asObservable();
   }
 
-  addPacient(firstName: string, lastName:string, heightPacient:string,
-    weightPacient:string,
-    bloodType:string,
-    sexType:string,
-    dni:string,
-    date:string){
-    const pacient: Pacient={firstName: firstName,
-      id:null,
-      lastName: lastName,
-      heightPacient: heightPacient,
-      weightPacient: weightPacient,
-      bloodType: bloodType,
-      sexType:sexType,
-      dni:dni,
-      date:date};
-    this.http.post<{message:string, id:string}>('http://localhost:3000/api/pacients',pacient)
-      .subscribe( res =>{
+  addPacient(firstName: string, lastName: string, heightPacient: string,
+             weightPacient: string,
+             bloodType: string,
+             sexType: string,
+             dni: string,
+             date: string) {
+    const pacient: Pacient = {firstName,
+      id: null,
+      lastName,
+      heightPacient,
+      weightPacient,
+      bloodType,
+      sexType,
+      dni,
+      date};
+    this.http.post<{message: string, id: string}>('http://localhost:3000/api/pacients', pacient)
+      .subscribe( res => {
         const id = res.id;
         pacient.id = id;
         this.pacients.push(pacient);
@@ -66,47 +66,47 @@ export class PacientsService {
       });
   }
 
-  getPacient(id:string) {
-    return this.http.get<{_id:string;
+  getPacient(id: string) {
+    return this.http.get<{_id: string;
     firstName: string;
     lastName: string;
     heightPacient: string;
     weightPacient: string;
     bloodType: string;
-    sexType:string;
-    dni:string;
-    date:string}>( 'http://localhost:3000/api/pacients/'+id );
+    sexType: string;
+    dni: string;
+    date: string}>( 'http://localhost:3000/api/pacients/' + id );
   }
 
-  updatePacient( id:string, firstName:string,
-    lastName:string, heightPacient:string,
-    weightPacient:string, bloodType:string,
-    sexType:string, dni:string, date:string){
-      const pacient: Pacient ={
-        id:id,
-        firstName:firstName,
-        lastName:lastName,
-        heightPacient:heightPacient,
-        weightPacient:weightPacient,
-        bloodType:bloodType,
-        sexType:sexType,
-        dni:dni,
-        date:date
-      }
+  updatePacient( id: string, firstName: string,
+                 lastName: string, heightPacient: string,
+                 weightPacient: string, bloodType: string,
+                 sexType: string, dni: string, date: string) {
+      const pacient: Pacient = {
+        id,
+        firstName,
+        lastName,
+        heightPacient,
+        weightPacient,
+        bloodType,
+        sexType,
+        dni,
+        date
+      };
 
-      this.http.put('http://localhost:3000/api/pacients/'+id, pacient)
+      this.http.put('http://localhost:3000/api/pacients/' + id, pacient)
         .subscribe(res => {
           const updatePacients = [...this.pacients];
-          const oldPacientIndex = updatePacients.findIndex(obj => obj.id ===pacient.id);
+          const oldPacientIndex = updatePacients.findIndex(obj => obj.id === pacient.id);
           updatePacients[oldPacientIndex] = pacient;
           this.pacients = updatePacients;
           this.pacientsUpdated.next([...this.pacients]);
           this.router.navigate(['/']);
         });
     }
-  deletePacient(id:string){
+  deletePacient(id: string) {
     this.http.delete('http://localhost:3000/api/pacients/' + id)
-      .subscribe(()=>{
+      .subscribe(() => {
         const filterPacients = this.pacients.filter(pacient => pacient.id !== id);
         this.pacients = filterPacients;
         this.pacientsUpdated.next([...this.pacients]);

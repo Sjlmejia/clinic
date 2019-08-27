@@ -3,9 +3,10 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PacientsService } from '../pacients.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Pacient } from '../pacient.model';
+import { mimeType } from './mime-type.validator';
 
 @Component({
-  selector:'app-create',
+  selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
@@ -17,7 +18,7 @@ export  class CreateComponent implements OnInit {
   private id: string;
   private mode = 'create';
   title = 'Nuevo Paciente';
-  constructor(public pacientsService: PacientsService, public route: ActivatedRoute){}
+  constructor(public pacientsService: PacientsService, public route: ActivatedRoute) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -33,15 +34,15 @@ export  class CreateComponent implements OnInit {
       sexType: new FormControl(null, {}),
       dni: new FormControl(null, {}),
       date: new FormControl(null, {}),
-      image: new FormControl(null, {})
+      image: new FormControl(null, {asyncValidators: [mimeType]})
     });
-    this.route.paramMap.subscribe((paramMap: ParamMap)=>{
-      if(paramMap.has('id')) {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      if (paramMap.has('id')) {
         this.mode = 'edit';
-        this.title = 'Editar Paciente'
+        this.title = 'Editar Paciente';
         this.id = paramMap.get('id');
         this.isLoading = true;
-        this.pacientsService.getPacient(this.id).subscribe(data =>{
+        this.pacientsService.getPacient(this.id).subscribe(data => {
           this.isLoading = false;
           this.pacient = {
             id: data._id,
@@ -53,7 +54,7 @@ export  class CreateComponent implements OnInit {
             sexType: data.sexType,
             dni: data.dni,
             date: data.date
-          }
+          };
           this.form.setValue({
             firstName: this.pacient.firstName,
             lastName: this.pacient.lastName,
@@ -63,7 +64,7 @@ export  class CreateComponent implements OnInit {
             sexType: this.pacient.sexType,
             dni: this.pacient.dni,
             date: this.pacient.date
-          })
+          });
         });
       } else {
         this.mode = 'create';
@@ -86,21 +87,21 @@ export  class CreateComponent implements OnInit {
   }
   onSavePacient() {
     console.log('se guardo');
-    if(this.form.invalid){
+    if (this.form.invalid) {
       return;
     }
     this.isLoading = true;
-    if( this.mode ==='create' ) {
+    if ( this.mode === 'create' ) {
       this.pacientsService.addPacient(this.form.value.firstName,
-        this.form.value.lastName, this.form.value.heightPacient, this.form.value.weightPacient,this.form.value.bloodType,
-        this.form.value.sexType,this.form.value.dni,this.form.value.date);
+        this.form.value.lastName, this.form.value.heightPacient, this.form.value.weightPacient, this.form.value.bloodType,
+        this.form.value.sexType, this.form.value.dni, this.form.value.date);
     } else {
       console.log('entro aqui');
       this.pacientsService.updatePacient(
         this.id,
         this.form.value.firstName,
-        this.form.value.lastName, this.form.value.heightPacient, this.form.value.weightPacient,this.form.value.bloodType,
-        this.form.value.sexType,this.form.value.dni,this.form.value.date
+        this.form.value.lastName, this.form.value.heightPacient, this.form.value.weightPacient, this.form.value.bloodType,
+        this.form.value.sexType, this.form.value.dni, this.form.value.date
       );
     }
     this.form.reset();
