@@ -94,7 +94,7 @@ export  class CreateComponent implements OnInit {
     if ( this.mode === 'create' ) {
       this.pacientsService.addPacient(this.form.value.firstName,
         this.form.value.lastName, this.form.value.heightPacient, this.form.value.weightPacient, this.form.value.bloodType,
-        this.form.value.sexType, this.form.value.dni, this.form.value.date);
+        this.form.value.sexType, this.form.value.dni, this.form.value.date, this.form.value.image);
     } else {
       console.log('entro aqui');
       this.pacientsService.updatePacient(

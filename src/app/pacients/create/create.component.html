@@ -37,7 +37,7 @@
       <button mat-stroked-button type="button" (click)="filePicker.click()">Cargar Imagen</button>
       <input type="file" #filePicker  (change)="onImagePicked($event)">
     </div>
-    <div class="image-preview"  *ngIf="imagePreview !== ''  && imagePreview">
+    <div class="image-preview"  *ngIf="imagePreview !== ''  && imagePreview && form.get('image').valid">
       <img id="blah" [src]="imagePreview" alt="form.value.image.name" />
     </div>
     <button class="save" mat-stroked-button type="submit">Guardar Paciente</button>

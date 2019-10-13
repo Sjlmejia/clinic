@@ -24,10 +24,10 @@ export class ListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.pacientsService.getPacients(this.itemsPerPage, this.currentPage);
     this.pacientsSub = this.pacientsService.getPacientUpdateListener()
-      	.subscribe((pacients: Pacient[]) => {
-          this.isLoading = false;
-          this.pacients = pacients;
-        });
+      .subscribe((pacients: Pacient[]) => {
+        this.isLoading = false;
+        this.pacients = pacients;
+      });
   }
 
   ngOnDestroy() {

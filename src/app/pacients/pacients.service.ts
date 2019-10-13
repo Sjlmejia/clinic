@@ -46,20 +46,34 @@ export class PacientsService {
              bloodType: string,
              sexType: string,
              dni: string,
-             date: string) {
-    const pacient: Pacient = {firstName,
-      id: null,
-      lastName,
-      heightPacient,
-      weightPacient,
-      bloodType,
-      sexType,
-      dni,
-      date};
-    this.http.post<{message: string, id: string}>('http://localhost:3000/api/pacients', pacient)
+             date: string,
+             image: File) {
+    const pacientData = new FormData();
+    pacientData.append('firstName', firstName);
+    pacientData.append('lastName', lastName);
+    pacientData.append('heightPacient', heightPacient);
+    pacientData.append('weightPacient', weightPacient);
+    pacientData.append('bloodType', bloodType);
+    pacientData.append('sexType', sexType);
+    pacientData.append('dni', dni);
+    pacientData.append('date', date);
+    pacientData.append('image', image, firstName);
+
+    this.http.post<{message: string, id: string}>(
+      'http://localhost:3000/api/pacients',
+      pacientData
+      )
       .subscribe( res => {
-        const id = res.id;
-        pacient.id = id;
+        const pacient: Pacient = {
+          firstName,
+          id: res.id,
+          lastName,
+          heightPacient,
+          weightPacient,
+          bloodType,
+          sexType,
+          dni,
+          date};
         this.pacients.push(pacient);
         this.pacientsUpdated.next([...this.pacients]);
         this.router.navigate(['/']);
