@@ -8,4 +8,5 @@ export interface Pacient {
   sexType: string;
   dni: string;
   date: string;
+  imagePath: string;
 }

@@ -9,6 +9,7 @@ import { MatInputModule,
          MatNativeDateModule,
          MatDatepickerModule,
          MatDividerModule,
+         MatIconModule,
          MatProgressSpinnerModule,
          MatPaginatorModule} from '@angular/material';
 
@@ -19,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
 import { ListComponent } from './pacients/list/list.component';
 import { from } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ViewComponent } from './pacients/view/view.component';
 // import { ErrorInterceptor } from './error-interceptor';
 
 @NgModule({
@@ -26,7 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     CreateComponent,
     HeaderComponent,
-    ListComponent
+    ListComponent,
+    ViewComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatNativeDateModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    MatIconModule,
     MatPaginatorModule,
     HttpClientModule
   ],

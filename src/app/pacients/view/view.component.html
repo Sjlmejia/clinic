@@ -1,0 +1,7 @@
+<div *ngIf="pacient">
+  <mat-label>{{pacient.firstName}}</mat-label>
+  <mat-label>{{pacient.lastName}}</mat-label>
+  <div>
+    <img [src]="pacient.imagePath" [alt]="pacient.firstName">
+  </div>
+</div>

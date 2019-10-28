@@ -27,7 +27,8 @@ export class PacientsService {
             bloodType: pacient.bloodType,
             sexType: pacient.sexType,
             dni: pacient.dni,
-            date: pacient.date
+            date: pacient.date,
+            imagePath: pacient.imagePath
           };
         });
       }))
@@ -48,6 +49,7 @@ export class PacientsService {
              dni: string,
              date: string,
              image: File) {
+    console.log('entro aquisave');
     const pacientData = new FormData();
     pacientData.append('firstName', firstName);
     pacientData.append('lastName', lastName);
@@ -59,14 +61,15 @@ export class PacientsService {
     pacientData.append('date', date);
     pacientData.append('image', image, firstName);
 
-    this.http.post<{message: string, id: string}>(
+    this.http.post<{message: string, pacient: Pacient}>(
       'http://localhost:3000/api/pacients',
       pacientData
       )
       .subscribe( res => {
         const pacient: Pacient = {
           firstName,
-          id: res.id,
+          id: res.pacient.id,
+          imagePath: res.pacient.imagePath,
           lastName,
           heightPacient,
           weightPacient,
@@ -89,29 +92,58 @@ export class PacientsService {
     bloodType: string;
     sexType: string;
     dni: string;
-    date: string}>( 'http://localhost:3000/api/pacients/' + id );
+    date: string, imagePath: string}>( 'http://localhost:3000/api/pacients/' + id );
   }
 
   updatePacient( id: string, firstName: string,
                  lastName: string, heightPacient: string,
                  weightPacient: string, bloodType: string,
-                 sexType: string, dni: string, date: string) {
-      const pacient: Pacient = {
-        id,
-        firstName,
-        lastName,
-        heightPacient,
-        weightPacient,
-        bloodType,
-        sexType,
-        dni,
-        date
-      };
-
-      this.http.put('http://localhost:3000/api/pacients/' + id, pacient)
+                 sexType: string, dni: string, date: string,
+                 image: File | string) {
+      let pacientData: Pacient | FormData;
+      if ( typeof image === 'object' ) {
+        pacientData = new FormData();
+        pacientData.append('id', id);
+        pacientData.append('firstName', firstName);
+        pacientData.append('lastName', lastName);
+        pacientData.append('heightPacient', heightPacient);
+        pacientData.append('weightPacient', weightPacient);
+        pacientData.append('bloodType', bloodType);
+        pacientData.append('sexType', sexType);
+        pacientData.append('dni', dni);
+        pacientData.append('date', date);
+        pacientData.append('image', image, firstName);
+      } else {
+        pacientData = {
+          id,
+          firstName,
+          lastName,
+          heightPacient,
+          weightPacient,
+          bloodType,
+          sexType,
+          dni,
+          date,
+          imagePath: image
+        };
+      }
+      this.http
+      .put('http://localhost:3000/api/pacients/' + id, pacientData)
         .subscribe(res => {
           const updatePacients = [...this.pacients];
-          const oldPacientIndex = updatePacients.findIndex(obj => obj.id === pacient.id);
+          const oldPacientIndex = updatePacients.findIndex(obj => obj.id === id);
+          const pacient: Pacient = {
+            id,
+            firstName,
+            lastName,
+            heightPacient,
+            weightPacient,
+            bloodType,
+            sexType,
+            dni,
+            date,
+            imagePath: ''
+          };
           updatePacients[oldPacientIndex] = pacient;
           this.pacients = updatePacients;
           this.pacientsUpdated.next([...this.pacients]);

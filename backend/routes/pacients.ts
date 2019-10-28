@@ -26,6 +26,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({storage});
 router.post('', upload.single('image'), (req, res, next) => {
+  const url = req.protocol + '://' + req.get('host');
   const pacient = new Pacient({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -34,12 +35,16 @@ router.post('', upload.single('image'), (req, res, next) => {
     bloodType: req.body.bloodType,
     sexType: req.body.sexType,
     dni: req.body.dni,
-    date: req.body.date
+    date: req.body.date,
+    imagePath: url + '/images/' +  req.file.filename
   });
   pacient.save().then(data => {
     res.status(201).json({
       message: 'Paciente creado',
-      id : data._id
+      pacient: {
+        ...data,
+        id: data._id
+      }
     });
   })
   .catch(error => {
@@ -49,7 +54,12 @@ router.post('', upload.single('image'), (req, res, next) => {
   });
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', upload.single('image'), (req, res, next) => {
+  let imagePath = req.body.imagePath;
+  if (req.file) {
+    const url = req.protocol + '://' + req.get('host');
+    imagePath = url + '/images/' +  req.file.filename;
+  }
   const pacient = new Pacient({
     _id: req.body.id,
     firstName: req.body.firstName,
@@ -59,7 +69,8 @@ router.put('/:id', (req, res, next) => {
     bloodType: req.body.bloodType,
     sexType: req.body.sexType,
     dni: req.body.dni,
-    date: req.body.date
+    date: req.body.date,
+    imagePath
   });
   Pacient.updateOne({ _id: req.params.id }, pacient).then(respuest => {
     res.status(200).json({message: 'Actualizado'});

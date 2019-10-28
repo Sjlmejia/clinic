@@ -14,7 +14,7 @@ export  class CreateComponent implements OnInit {
   pacient: Pacient;
   form: FormGroup;
   isLoading = false;
-  imagePreview: any;
+  imagePreview: string;
   private id: string;
   private mode = 'create';
   title = 'Nuevo Paciente';
@@ -34,7 +34,10 @@ export  class CreateComponent implements OnInit {
       sexType: new FormControl(null, {}),
       dni: new FormControl(null, {}),
       date: new FormControl(null, {}),
-      image: new FormControl(null, {asyncValidators: [mimeType]})
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [mimeType]
+      })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
@@ -53,7 +56,8 @@ export  class CreateComponent implements OnInit {
             bloodType: data.bloodType,
             sexType: data.sexType,
             dni: data.dni,
-            date: data.date
+            date: data.date,
+            imagePath: data.imagePath
           };
           this.form.setValue({
             firstName: this.pacient.firstName,
@@ -63,7 +67,8 @@ export  class CreateComponent implements OnInit {
             bloodType: this.pacient.bloodType,
             sexType: this.pacient.sexType,
             dni: this.pacient.dni,
-            date: this.pacient.date
+            date: this.pacient.date,
+            image: this.pacient.imagePath
           });
         });
       } else {
@@ -101,7 +106,8 @@ export  class CreateComponent implements OnInit {
         this.id,
         this.form.value.firstName,
         this.form.value.lastName, this.form.value.heightPacient, this.form.value.weightPacient, this.form.value.bloodType,
-        this.form.value.sexType, this.form.value.dni, this.form.value.date
+        this.form.value.sexType, this.form.value.dni, this.form.value.date,
+        this.form.value.image
       );
     }
     this.form.reset();
