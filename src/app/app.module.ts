@@ -21,6 +21,8 @@ import { ListComponent } from './pacients/list/list.component';
 import { from } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewComponent } from './pacients/view/view.component';
+import { AttendCreateComponent } from './attend/attend-create/attend-create.component';
+import { AttendListComponent } from './attend/attend-list/attend-list.component';
 // import { ErrorInterceptor } from './error-interceptor';
 
 @NgModule({
@@ -29,7 +31,9 @@ import { ViewComponent } from './pacients/view/view.component';
     CreateComponent,
     HeaderComponent,
     ListComponent,
-    ViewComponent
+    ViewComponent,
+    AttendCreateComponent,
+    AttendListComponent
   ],
   imports: [
     BrowserModule,

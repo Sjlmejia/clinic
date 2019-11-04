@@ -1,7 +1,30 @@
-<div *ngIf="pacient">
-  <mat-label>{{pacient.firstName}}</mat-label>
-  <mat-label>{{pacient.lastName}}</mat-label>
+<mat-card class="container">
+  <h2 *ngIf="!isLoading">Detalles del Paciente</h2>
   <div>
-    <img [src]="pacient.imagePath" [alt]="pacient.firstName">
+    <mat-spinner *ngIf="isLoadingPacient"> </mat-spinner>
+    <div *ngIf="!isLoadingPacient">
+      <div class="group">
+        <mat-label class="title">Nombres: </mat-label>
+        <mat-label class="label">{{ pacient.firstName }}</mat-label>
+      </div>
+      <div class="group">
+        <mat-label class="title">Apellidos: </mat-label>
+        <mat-label class="label">{{ pacient.lastName }}</mat-label>
+      </div>
+      <div class="group">
+        <div class="title">Foto:</div>
+        <img class="image" [src]="pacient.imagePath" />
+      </div>
+      <button
+        mat-stroked-button
+        [routerLink]="['/create-attend', id]"
+        routerLinkActive="router-link-active"
+      >
+        Nueva Consulta
+      </button>
+    </div>
   </div>
-</div>
+  <div *ngIf="!isLoading">
+    <app-attend-list [options]="attends"></app-attend-list>
+  </div>
+</mat-card>

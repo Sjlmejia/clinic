@@ -4,6 +4,7 @@ import mongoose = require('mongoose');
 import path = require('path');
 
 import pacientsRoutes = require('./routes/pacients');
+import attendsRoutes = require('./routes/attends');
 const app: express.Application = express();
 mongoose.connect('mongodb://localhost:27017/PacientsDB', {useNewUrlParser: true})
  .then(() => {
@@ -30,4 +31,5 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/pacients', pacientsRoutes);
+app.use('/api/attends', attendsRoutes);
 export = app;

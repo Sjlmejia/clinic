@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Pacient } from '../pacient.model';
 import { PacientsService } from '../pacients.service';
-import { from } from 'rxjs';
 import { PageEvent } from '@angular/material';
 @Component({
   selector: 'app-list',

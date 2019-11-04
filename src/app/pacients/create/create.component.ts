@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PacientsService } from '../pacients.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Pacient } from '../pacient.model';
@@ -59,14 +59,15 @@ export  class CreateComponent implements OnInit {
             date: data.date,
             imagePath: data.imagePath
           };
+          console.log('hola', this.pacient);
           this.form.setValue({
             firstName: this.pacient.firstName,
             lastName: this.pacient.lastName,
-            heightPacient: this.pacient.heightPacient,
-            weightPacient: this.pacient.weightPacient,
-            bloodType: this.pacient.bloodType,
-            sexType: this.pacient.sexType,
-            dni: this.pacient.dni,
+            heightPacient: this.pacient.heightPacient === 'null' ? '' : this.pacient.heightPacient,
+            weightPacient: this.pacient.weightPacient === 'null' ? '' : this.pacient.weightPacient,
+            bloodType: this.pacient.bloodType === 'null' ? '' : this.pacient.weightPacient,
+            sexType: this.pacient.sexType === 'null' ? '' : this.pacient.weightPacient,
+            dni: this.pacient.dni === 'null' ? '' : this.pacient.weightPacient,
             date: this.pacient.date,
             image: this.pacient.imagePath
           });

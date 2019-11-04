@@ -1,5 +1,7 @@
 .toolbar {
   margin-bottom: 10px;
+  background: black;
+  color: white;
 }
 
 .button {

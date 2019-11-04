@@ -1,0 +1,9 @@
+<h2>Lista de Consultas</h2>
+<div class="header">
+  <div class="item title">Motivo de Consulta</div>
+  <div class="item title">Fecha de consulta</div>
+</div>
+<div *ngFor="let option of options" class="list">
+  <div class="item option">{{option.description}}</div>
+  <div class="item option">{{date}}</div>
+</div>
