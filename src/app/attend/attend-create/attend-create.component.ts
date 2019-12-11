@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AttendsService } from '../attends.service';
 
@@ -12,6 +12,7 @@ export class AttendCreateComponent implements OnInit {
   private id: string;
   form: FormGroup;
   isLoading = false;
+  items = [];
   constructor(public route: ActivatedRoute, private attendsService: AttendsService) { }
   ngOnInit() {
     this.form = new FormGroup({
@@ -26,14 +27,19 @@ export class AttendCreateComponent implements OnInit {
   }
 
   onSaveAttend() {
-    console.log('se guardo attend');
     if (this.form.invalid) {
       return;
     }
     this.isLoading = true;
-    this.attendsService.addAttend(this.form.value.description, this.form.value.date, this.id);
+    this.attendsService.addAttend(this.form.value.description, this.form.value.date, this.id, this.items);
 
     this.form.reset();
   }
-
+  test(e, type, index) {
+    this.items[index][type] = e.target.value;
+    console.log('event', this.items, index);
+  }
+  addItem() {
+    this.items.push({name: '', description: ''});
+  }
 }

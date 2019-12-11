@@ -12,13 +12,20 @@ export class AttendsService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  addAttend(description: string, date: string, idPacient: string) {
-    console.log('entro aquisave');
-    const attendData = new FormData();
-    attendData.append('description', description);
-    attendData.append('idPacient', idPacient);
-    attendData.append('date', date);
-
+  addAttend(description: string, date: string, idPacient: string, items: any) {
+    // const attendData = new FormData();
+    // attendData.append('description', description);
+    // attendData.append('idPacient', idPacient);
+    // attendData.append('date', date);
+    // attendData.append('items', items);
+    // console.log('entro aquisave', attendData);
+    const attendData = {
+      description,
+      idPacient,
+      date,
+      items
+    };
+    console.log('entro aquisave', attendData);
     this.http.post<{message: string, attend: Attend}>(
       'http://localhost:3000/api/attends',
       attendData
@@ -28,7 +35,10 @@ export class AttendsService {
           id: res.attend.id,
           description,
           idPacient,
-          date};
+          date,
+          items};
+        console.log('eee', attend)
+        console.log('dssdds', this.attends);
         this.attends.push(attend);
         this.attendsUpdated.next([...this.attends]);
         this.router.navigate(['/view', idPacient]);
@@ -58,7 +68,8 @@ export class AttendsService {
             id: attend._id,
             description: attend.description,
             date: attend.date,
-            idPacient: attend.idPacient
+            idPacient: attend.idPacient,
+            items: attend.items
           };
         });
       }))

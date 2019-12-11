@@ -2,7 +2,7 @@
   <mat-spinner *ngIf="isLoading">
   </mat-spinner>
   <mat-card-title *ngIf="!isLoading">Detalles de la Consulta</mat-card-title>
-  <form [formGroup]="form" (submit) = "onSaveAttend()" class="form" *ngIf="!isLoading">
+  <form [formGroup]="form" class="form" *ngIf="!isLoading">
     <mat-form-field>
       <textarea  matInput placeholder="Descripcion" formControlName="description" autocomplete="off"></textarea>
       <mat-error *ngIf="form.get('description').invalid">Descripcion</mat-error>
@@ -12,6 +12,21 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <button class="save" mat-stroked-button type="submit">Guardar Consulta</button>
+    <div>
+      <button mat-stroked-button (click)="addItem()">Agregar Item</button>
+      <div *ngFor="let item of items; let i = index">
+        <div class="items">
+          <mat-form-field class="container">
+            <mat-label>Nombre Medicamento</mat-label>
+            <input matInput [value]="item.name"  (change)="test($event, 'name' ,i)" class="item">
+          </mat-form-field>
+          <mat-form-field class="container">
+            <mat-label>Descripción</mat-label>
+            <input matInput [(value)]="item.description"  (change)="test($event, 'description' ,i)" class="item">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <button class="save" mat-stroked-button (click)="onSaveAttend()">Guardar Consulta</button>
   </form>
 </mat-card>

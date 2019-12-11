@@ -12,6 +12,7 @@ export class AttendListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('this.options', this.options);
     this.date = moment(this.options.date).format('YYYY MM DD');
   }
 

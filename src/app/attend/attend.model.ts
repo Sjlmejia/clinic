@@ -3,4 +3,5 @@ export interface Attend {
   description: string;
   date: string;
   idPacient: string;
+  items: [];
 }

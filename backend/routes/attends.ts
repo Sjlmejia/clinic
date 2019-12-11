@@ -27,10 +27,12 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 router.post('', upload.single('image'), (req, res, next) => {
   const url = req.protocol + '://' + req.get('host');
+  console.log('req', req.body);
   const attend = new Attend({
     idPacient: req.body.idPacient,
     description: req.body.description,
     date: req.body.date,
+    items: req.body.items
   });
   console.log('attend', attend)
   attend.save().then(data => {
