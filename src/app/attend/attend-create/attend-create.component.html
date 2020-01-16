@@ -12,7 +12,29 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <div>
+    <mat-card>
+      <mat-card-title>Cargar Fotos</mat-card-title>
+      <!-- <button mat-stroked-button (click)="addPhoto()">Agregar Foto</button> -->
+      <button mat-stroked-button type="button" (click)="filePicker.click()">Cargar Imagenes</button>
+      <input type="file" #filePicker  (change)="onImagePicked($event)" multiple>
+      <div>
+        <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
+      </div>
+      <!-- <div *ngFor="let item of items; let i = index">
+        <div class="items">
+          <mat-form-field class="container">
+            <mat-label>Nombre Medicamento</mat-label>
+            <input matInput [value]="item.name"  (change)="test($event, 'name' ,i)" class="item">
+          </mat-form-field>
+          <mat-form-field class="container">
+            <mat-label>Descripción</mat-label>
+            <input matInput [(value)]="item.description"  (change)="test($event, 'description' ,i)" class="item">
+          </mat-form-field>
+        </div>
+      </div> -->
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Receta Medica</mat-card-title>
       <button mat-stroked-button (click)="addItem()">Agregar Item</button>
       <div *ngFor="let item of items; let i = index">
         <div class="items">
@@ -26,7 +48,7 @@
           </mat-form-field>
         </div>
       </div>
-    </div>
+    </mat-card>
     <button class="save" mat-stroked-button (click)="onSaveAttend()">Guardar Consulta</button>
   </form>
 </mat-card>
