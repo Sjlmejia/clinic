@@ -6,7 +6,7 @@ import path = require('path');
 import pacientsRoutes = require('./routes/pacients');
 import attendsRoutes = require('./routes/attends');
 const app: express.Application = express();
-mongoose.connect('mongodb://localhost:27017/PacientsDB', {useNewUrlParser: true})
+mongoose.connect('mongodb://localhost:27017/MedicamentosDB', {useNewUrlParser: true})
  .then(() => {
    console.log('se conecto');
  })

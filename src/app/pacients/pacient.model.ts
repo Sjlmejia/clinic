@@ -1,12 +1,29 @@
 export interface Pacient {
   id: string;
-  firstName: string;
-  lastName: string;
-  heightPacient: string;
-  weightPacient: string;
-  bloodType: string;
-  sexType: string;
-  dni: string;
-  date: string;
-  imagePath: string;
+  drugName: string;
+  drugType: string;
+  mechanismOfAction: string;
+  indicationsOrSpectrum: string;
+  adults: string;
+  children: string;
+  elderly: string;
+  kidneyFailure: string;
+  liverFailure: string;
+  pregnancyAndLactation: string;
+  bioavailability: string;
+  maximumConcentration: string;
+  areaDownCurve: string;
+  halfLife: string;
+  proteinBinding: string;
+  volumeOfDistribution: string;
+  metabolism: string;
+  excretion: string;
+  disseminationCNS: string;
+  intracellularConcetracion: string;
+  fcRatio: string;
+  iterectaionDrugs: string;
+  sideEffects: string;
+  contraindications: string;
+  tradenames: string;
+  comments: string;
 }

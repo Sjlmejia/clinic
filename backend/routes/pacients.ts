@@ -25,18 +25,37 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({storage});
+
 router.post('', upload.single('image'), (req, res, next) => {
   const url = req.protocol + '://' + req.get('host');
+  console.log('req.body', req.body)
   const pacient = new Pacient({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    heightPacient: req.body.heightPacient,
-    weightPacient: req.body.weightPacient,
-    bloodType: req.body.bloodType,
-    sexType: req.body.sexType,
-    dni: req.body.dni,
-    date: req.body.date,
-    imagePath: url + '/images/' +  req.file.filename
+    drugName: req.body.drugName,
+    drugType: req.body.drugType,
+    mechanismOfAction: req.body.mechanismOfAction,
+    indicationsOrSpectrum: req.body.indicationsOrSpectrum,
+    adults: req.body.adults,
+    children: req.body.children,
+    elderly: req.body.elderly,
+    kidneyFailure: req.body.kidneyFailure,
+    liverFailure: req.body.liverFailure,
+    pregnancyAndLactation: req.body.pregnancyAndLactation,
+    bioavailability: req.body.bioavailability,
+    maximumConcentration: req.body.maximumConcentration,
+    areaDownCurve: req.body.areaDownCurve,
+    halfLife: req.body.halfLife,
+    proteinBinding: req.body.proteinBinding,
+    volumeOfDistribution: req.body.volumeOfDistribution,
+    metabolism: req.body.metabolism,
+    excretion: req.body.excretion,
+    disseminationCNS: req.body.disseminationCNS,
+    intracellularConcetracion: req.body.intracellularConcetracion,
+    fcRatio: req.body.fcRatio,
+    iterectaionDrugs: req.body.iterectaionDrugs,
+    sideEffects: req.body.sideEffects,
+    contraindications: req.body.contraindications,
+    tradenames: req.body.tradenames,
+    comments: req.body.comments
   });
   pacient.save().then(data => {
     res.status(201).json({
@@ -48,6 +67,7 @@ router.post('', upload.single('image'), (req, res, next) => {
     });
   })
   .catch(error => {
+    console.log(error);
     res.status(500).json({
       message: 'error al crear el paciente'
     });
@@ -55,22 +75,34 @@ router.post('', upload.single('image'), (req, res, next) => {
 });
 
 router.put('/:id', upload.single('image'), (req, res, next) => {
-  let imagePath = req.body.imagePath;
-  if (req.file) {
-    const url = req.protocol + '://' + req.get('host');
-    imagePath = url + '/images/' +  req.file.filename;
-  }
   const pacient = new Pacient({
     _id: req.body.id,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    heightPacient: req.body.heightPacient,
-    weightPacient: req.body.weightPacient,
-    bloodType: req.body.bloodType,
-    sexType: req.body.sexType,
-    dni: req.body.dni,
-    date: req.body.date,
-    imagePath
+    drugName: req.body.drugName,
+    drugType: req.body.drugType,
+    mechanismOfAction: req.body.mechanismOfAction,
+    indicationsOrSpectrum: req.body.indicationsOrSpectrum,
+    adults: req.body.adults,
+    children: req.body.children,
+    elderly: req.body.elderly,
+    kidneyFailure: req.body.kidneyFailure,
+    liverFailure: req.body.liverFailure,
+    pregnancyAndLactation: req.body.pregnancyAndLactation,
+    bioavailability: req.body.bioavailability,
+    maximumConcentration: req.body.maximumConcentration,
+    areaDownCurve: req.body.areaDownCurve,
+    halfLife: req.body.halfLife,
+    proteinBinding: req.body.proteinBinding,
+    volumeOfDistribution: req.body.volumeOfDistribution,
+    metabolism: req.body.metabolism,
+    excretion: req.body.excretion,
+    disseminationCNS: req.body.disseminationCNS,
+    intracellularConcetracion: req.body.intracellularConcetracion,
+    fcRatio: req.body.fcRatio,
+    iterectaionDrugs: req.body.iterectaionDrugs,
+    sideEffects: req.body.sideEffects,
+    contraindications: req.body.contraindications,
+    tradenames: req.body.tradenames,
+    comments: req.body.comments
   });
   Pacient.updateOne({ _id: req.params.id }, pacient).then(respuest => {
     res.status(200).json({message: 'Actualizado'});
