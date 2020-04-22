@@ -1,15 +1,6 @@
 {
   "name": "clinic",
   "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "server": "nodemon ./backend/server.ts"
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
