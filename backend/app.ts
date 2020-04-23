@@ -6,7 +6,9 @@ import path = require('path');
 import pacientsRoutes = require('./routes/pacients');
 import attendsRoutes = require('./routes/attends');
 const app: express.Application = express();
-mongoose.connect('mongodb://localhost:27017/MedicamentosDB', {useNewUrlParser: true})
+// jorgemejia3223L jorge
+
+mongoose.connect('mongodb://jorge:jorgemejia3223L@cluster0-shard-00-00-nhims.mongodb.net:27017,cluster0-shard-00-01-nhims.mongodb.net:27017,cluster0-shard-00-02-nhims.mongodb.net:27017/medicamentosDB?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority', {useNewUrlParser: true})
  .then(() => {
    console.log('se conecto');
  })

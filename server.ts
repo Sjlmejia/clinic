@@ -1,6 +1,8 @@
 const debug = require("debug")("node-angular");
 import http = require("http");
-import app = require("./app");
+import express = require('express');
+import path = require ('path');
+import app = require("./backend/app");
 const normalizePort = val => {
   var port = parseInt(val, 10);
 
@@ -43,6 +45,12 @@ const onListening = () => {
 };
 
 const port = normalizePort(process.env.PORT || "3000");
+app.use(express.static(__dirname + '/dist/clinic'));
+
+app.get('/*', function(req,res) {
+    
+res.sendFile(path.join(__dirname+'/dist/clinic/index.html'));
+});
 app.set("port", port);
 
 const server = http.createServer(app);
