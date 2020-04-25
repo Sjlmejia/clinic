@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class PacientsService {
@@ -15,7 +16,7 @@ export class PacientsService {
   getPacients(itemsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${itemsPerPage}&page=${currentPage}`;
     this.http.get<{message: string, pacients: any}>(
-      'http://localhost:3000/api/pacients' + queryParams )
+      environment.baseUrl+'/api/pacients' + queryParams )
       .pipe(map((pacientsData) => {
         return pacientsData.pacients.map(pacient => {
           return {
@@ -117,7 +118,7 @@ export class PacientsService {
     pacientData.append('comments', comments);
 
     this.http.post<{message: string, pacient: Pacient}>(
-      'http://localhost:3000/api/pacients',
+      environment.baseUrl+'/api/pacients',
       pacientData
       )
       .subscribe( res => {
@@ -184,7 +185,7 @@ export class PacientsService {
     contraindications: string;
     tradenames: string;
     comments: string;
-  }>( 'http://localhost:3000/api/pacients/' + id );
+  }>( environment.baseUrl+ '/api/pacients/' + id );
   }
 
   updatePacient( id: string,
@@ -246,7 +247,7 @@ export class PacientsService {
         comments
     };
       this.http
-      .put('http://localhost:3000/api/pacients/' + id, pacientData)
+      .put(environment.baseUrl+'/api/pacients/' + id, pacientData)
         .subscribe(res => {
           const updatePacients = [...this.pacients];
           const oldPacientIndex = updatePacients.findIndex(obj => obj.id === id);
@@ -286,7 +287,7 @@ export class PacientsService {
         });
     }
   deletePacient(id: string) {
-    this.http.delete('http://localhost:3000/api/pacients/' + id)
+    this.http.delete(environment.baseUrl+'/api/pacients/' + id)
       .subscribe(() => {
         const filterPacients = this.pacients.filter(pacient => pacient.id !== id);
         this.pacients = filterPacients;
