@@ -1,6 +1,6 @@
-import express = require('express');
-import Pacient = require('../pacient');
-import multer = require('multer');
+const express = require('express');
+const Pacient = require('../pacient');
+const multer = require('multer');
 
 const router = express.Router();
 
@@ -143,4 +143,4 @@ router.delete('/:id', (req, res, next) => {
   })
 });
 
-export = router;
+module.exports = router;
