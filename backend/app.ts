@@ -6,13 +6,18 @@ import path = require('path');
 import pacientsRoutes = require('./routes/pacients');
 import attendsRoutes = require('./routes/attends');
 const app: express.Application = express();
-mongoose.connect('mongodb://localhost:27017/PacientsDB', {useNewUrlParser: true})
- .then(() => {
-   console.log('se conecto');
- })
- .catch((res) => {
-  console.log('No se conecto', res);
- });
+mongoose
+  .connect(
+    "mongodb://jorge:" +
+      process.env.MONGO_ATLAS_PW +
+      "@cluster0-shard-00-00-nhims.mongodb.net:27017,cluster0-shard-00-01-nhims.mongodb.net:27017,cluster0-shard-00-02-nhims.mongodb.net:27017/PacientsDB?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority"
+      , {useNewUrlParser: true})
+  .then(() => {
+    console.log("Connected to database!");
+  })
+  .catch((err) => {
+    console.log("Connection failed!", err);
+  });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/images', express.static(path.join('backend/images')));
