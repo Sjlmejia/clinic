@@ -16,7 +16,7 @@ export class PacientsService {
   getPacients(itemsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${itemsPerPage}&page=${currentPage}`;
     this.http.get<{message: string, pacients: any}>(
-      environment.baseUrl+'/api/pacients' + queryParams )
+      environment.baseUrl+'/api/pacients')
       .pipe(map((pacientsData) => {
         return pacientsData.pacients.map(pacient => {
           return {

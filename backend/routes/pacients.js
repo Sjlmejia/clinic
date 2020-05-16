@@ -28,7 +28,6 @@ const upload = multer({storage});
 
 router.post('', upload.single('image'), (req, res, next) => {
   const url = req.protocol + '://' + req.get('host');
-  console.log('req.body', req.body)
   const pacient = new Pacient({
     drugName: req.body.drugName,
     drugType: req.body.drugType,
@@ -69,7 +68,6 @@ router.post('', upload.single('image'), (req, res, next) => {
     });
   })
   .catch(error => {
-    console.log(error);
     res.status(500).json({
       message: 'error al crear el fármaco'
     });
@@ -117,7 +115,6 @@ router.get('', (req, res, next) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
   const postQuery = Pacient.find();
-  console.log('tessss', pageSize, currentPage);
   if (pageSize && currentPage) {
     postQuery
       .skip(pageSize * (currentPage - 1))
@@ -128,12 +125,6 @@ router.get('', (req, res, next) => {
       message: 'lista de fármacos',
       pacients: documents
     })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({
-        message: 'error del servidor'
-      });
-    });
   });
 });
 
