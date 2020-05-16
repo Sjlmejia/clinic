@@ -9,6 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start": "ng serve",
+    "build-prod": "ng build --prod",
     "heroku-postbuild": "ng build --configuration=production"
   },
   "engines": {
