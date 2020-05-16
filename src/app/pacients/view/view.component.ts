@@ -25,13 +25,6 @@ export class ViewComponent implements OnInit {
         this.pacient = data;
         this.isLoadingPacient = false;
       });
-      this.attendsService.getAttends(this.id);
-      this.attendsSub = this.attendsService.getAttendUpdateListener()
-      .subscribe((attends: any) => {
-        console.log('entro aqui');
-        this.isLoading = false;
-        this.attends = attends;
-      });
     });
   }
 

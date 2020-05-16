@@ -21,31 +21,17 @@
             <mat-label class="title">Indicaciones o espectro: </mat-label>
             <mat-label class="label">{{ pacient.indicationsOrSpectrum }}</mat-label>
           </div>
-          <div class="group">
-            <mat-label class="title">Nombre del fármaco: </mat-label>
-            <mat-label class="label">{{ pacient.drugName }}</mat-label>
-          </div>
-          <div class="group">
-            <mat-label class="title">Tipo de fármaco: </mat-label>
-            <mat-label class="label">{{ pacient.drugType }}</mat-label>
-          </div>
-          <div class="group">
-            <mat-label class="title">Nombre del fármaco: </mat-label>
-            <mat-label class="label">{{ pacient.drugName }}</mat-label>
-          </div>
-          <div class="group">
-            <mat-label class="title">Tipo de fármaco: </mat-label>
-            <mat-label class="label">{{ pacient.drugType }}</mat-label>
-          </div>
         </mat-card>
   
         <mat-card class="block-information">
-          <mat-card-subtitle>
-            Formas farmacéuticas:
-          </mat-card-subtitle>
-          <mat-card-subtitle>
-            Dosis y vías de administración:
-          </mat-card-subtitle>
+          <div class="group">
+            <mat-label class="title">Formas Farmaceutica: </mat-label>
+            <mat-label class="label">{{ pacient.formsPharmaceuticals }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Dosis y vias de administración: </mat-label>
+            <mat-label class="label">{{ pacient.management }}</mat-label>
+          </div>
           <div class="group">
             <mat-label class="title">Adultos: </mat-label>
             <mat-label class="label">{{ pacient.adults }}</mat-label>

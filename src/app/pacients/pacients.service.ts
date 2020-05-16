@@ -86,7 +86,10 @@ export class PacientsService {
     sideEffects: string,
     contraindications: string,
     tradenames: string,
-    comments: string
+    comments: string,
+    formsPharmaceuticals: string,
+    management: string,
+    
     ) {
     console.log('entro aquisave');
     const pacientData = new FormData();
@@ -116,6 +119,8 @@ export class PacientsService {
     pacientData.append('contraindications', contraindications);
     pacientData.append('tradenames', tradenames);
     pacientData.append('comments', comments);
+    pacientData.append('formsPharmaceuticals', formsPharmaceuticals);
+    pacientData.append('management', management);
 
     this.http.post<{message: string, pacient: Pacient}>(
       environment.baseUrl+'/api/pacients',
@@ -149,7 +154,9 @@ export class PacientsService {
           sideEffects,
           contraindications,
           tradenames,
-          comments
+          comments,
+          formsPharmaceuticals,
+          management
         };
         this.pacients.push(pacient);
         this.pacientsUpdated.next([...this.pacients]);
@@ -185,6 +192,8 @@ export class PacientsService {
     contraindications: string;
     tradenames: string;
     comments: string;
+    formsPharmaceuticals: string,
+    management: string,
   }>( environment.baseUrl+ '/api/pacients/' + id );
   }
 
@@ -214,7 +223,9 @@ export class PacientsService {
     sideEffects: string,
     contraindications: string,
     tradenames: string,
-    comments: string
+    comments: string,
+    formsPharmaceuticals: string,
+    management: string
                  ) {
     let pacientData: Pacient | FormData;
     pacientData = {
@@ -244,7 +255,9 @@ export class PacientsService {
         sideEffects,
         contraindications,
         tradenames,
-        comments
+        comments,
+        formsPharmaceuticals,
+        management
     };
       this.http
       .put(environment.baseUrl+'/api/pacients/' + id, pacientData)
@@ -278,7 +291,9 @@ export class PacientsService {
             sideEffects,
             contraindications,
             tradenames,
-            comments
+            comments,
+            formsPharmaceuticals,
+            management
           };
           updatePacients[oldPacientIndex] = pacient;
           this.pacients = updatePacients;

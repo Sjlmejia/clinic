@@ -55,11 +55,13 @@ router.post('', upload.single('image'), (req, res, next) => {
     sideEffects: req.body.sideEffects,
     contraindications: req.body.contraindications,
     tradenames: req.body.tradenames,
-    comments: req.body.comments
+    comments: req.body.comments,
+    formsPharmaceuticals: req.body.formsPharmaceuticals,
+    management: req.body.management
   });
   pacient.save().then(data => {
     res.status(201).json({
-      message: 'Paciente creado',
+      message: 'fármaco creado',
       pacient: {
         ...data,
         id: data._id
@@ -69,7 +71,7 @@ router.post('', upload.single('image'), (req, res, next) => {
   .catch(error => {
     console.log(error);
     res.status(500).json({
-      message: 'error al crear el paciente'
+      message: 'error al crear el fármaco'
     });
   });
 });
@@ -102,7 +104,9 @@ router.put('/:id', upload.single('image'), (req, res, next) => {
     sideEffects: req.body.sideEffects,
     contraindications: req.body.contraindications,
     tradenames: req.body.tradenames,
-    comments: req.body.comments
+    comments: req.body.comments,
+    formsPharmaceuticals: req.body.formsPharmaceuticals,
+    management: req.body.management
   });
   Pacient.updateOne({ _id: req.params.id }, pacient).then(respuest => {
     res.status(200).json({message: 'Actualizado'});
@@ -121,8 +125,14 @@ router.get('', (req, res, next) => {
   }
   postQuery.then(documents => {
     res.status(200).json({
-      message: 'OK',
+      message: 'lista de fármacos',
       pacients: documents
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({
+        message: 'error del servidor'
+      });
     });
   });
 });
@@ -132,14 +142,14 @@ router.get('/:id', (req, res, next) => {
     if (pacient) {
       res.status(200).json(pacient);
     } else {
-      res.status(404).json({message: 'Paciente no encontrado'});
+      res.status(404).json({message: 'fármaco no encontrado'});
     }
   })
 });
 
 router.delete('/:id', (req, res, next) => {
   Pacient.deleteOne({_id: req.params.id}).then(result => {
-    res.status(200).json({message: 'Paciente eliminado'})
+    res.status(200).json({message: 'fármaco eliminado'})
   })
 });
 

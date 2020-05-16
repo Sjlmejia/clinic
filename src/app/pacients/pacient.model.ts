@@ -26,4 +26,6 @@ export interface Pacient {
   contraindications: string;
   tradenames: string;
   comments: string;
+  formsPharmaceuticals: string;
+  management: string
 }

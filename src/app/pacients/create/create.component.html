@@ -24,13 +24,14 @@
       </mat-card>
   
       <mat-card class="block-information">
-        <mat-card-subtitle>
-          Formas farmacéuticas:
-        </mat-card-subtitle>
-        <mat-card-subtitle>
-          Dosis y vías de administración:
-        </mat-card-subtitle>
-    
+        <mat-form-field>
+          <textarea matInput placeholder="Formas Farmaceuticas" formControlName="formsPharmaceuticals" autocomplete="off"></textarea>
+          <mat-error *ngIf="form.get('formsPharmaceuticals').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput placeholder="Dosis y vias de administración" formControlName="management" autocomplete="off"></textarea>
+          <mat-error *ngIf="form.get('management').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Adultos" formControlName="adults" autocomplete="off">
           <mat-error *ngIf="form.get('adults').invalid">Por favor llene este campo</mat-error>

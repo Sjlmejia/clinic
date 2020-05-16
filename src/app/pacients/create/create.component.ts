@@ -99,7 +99,13 @@ export  class CreateComponent implements OnInit {
       }),
       comments: new FormControl(null, {
         validators: [Validators.required]
-      })  
+      }),
+      formsPharmaceuticals: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      management: new FormControl(null, {
+        validators: [Validators.required]
+      })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
@@ -136,7 +142,9 @@ export  class CreateComponent implements OnInit {
             sideEffects: data.sideEffects,
             contraindications: data.contraindications,
             tradenames: data.tradenames,
-            comments: data.comments
+            comments: data.comments,
+            formsPharmaceuticals: data.formsPharmaceuticals,
+            management: data.management
           };
           console.log('hola', this.pacient);
           this.form.setValue({
@@ -166,6 +174,8 @@ export  class CreateComponent implements OnInit {
             contraindications: this.getValue(this.pacient.contraindications),
             tradenames: this.getValue(this.pacient.tradenames),
             comments: this.getValue(this.pacient.comments),
+            formsPharmaceuticals: this.getValue(this.pacient.formsPharmaceuticals),
+            management: this.getValue(this.pacient.management),
           });
         });
       } else {
@@ -176,7 +186,8 @@ export  class CreateComponent implements OnInit {
   }
 
   getValue(name) {
-    return name === 'null' ? '' : name;
+    console.log('entro aqui', name)
+    return name === 'null' || !name ? '' : name;
   }
 
   onImagePicked(event: any) {
@@ -225,7 +236,9 @@ export  class CreateComponent implements OnInit {
         this.form.value.sideEffects,
         this.form.value.contraindications,
         this.form.value.tradenames,
-        this.form.value.comments
+        this.form.value.comments,
+        this.form.value.formsPharmaceuticals,
+        this.form.value.management
         );
     } else {
       console.log('entro aqui');
@@ -256,7 +269,9 @@ export  class CreateComponent implements OnInit {
         this.form.value.sideEffects,
         this.form.value.contraindications,
         this.form.value.tradenames,
-        this.form.value.comments
+        this.form.value.comments,
+        this.form.value.formsPharmaceuticals,
+        this.form.value.management
       );
     }
     this.form.reset();

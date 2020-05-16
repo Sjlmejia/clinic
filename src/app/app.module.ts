@@ -8,6 +8,7 @@ import { MatInputModule,
          MatToolbarModule,
          MatNativeDateModule,
          MatFormFieldModule,
+         MatSnackBarModule,
          MatDatepickerModule,
          MatDividerModule,
          MatIconModule,
@@ -24,7 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewComponent } from './pacients/view/view.component';
 import { AttendCreateComponent } from './attend/attend-create/attend-create.component';
 import { AttendListComponent } from './attend/attend-list/attend-list.component';
-// import { ErrorInterceptor } from './error-interceptor';
+import { HttpConfigInterceptor } from './interceptor/httpconfig.iterceptor';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AttendListComponent } from './attend/attend-list/attend-list.component'
     MatToolbarModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    MatSnackBarModule,
     MatNativeDateModule,
     MatDividerModule,
     MatProgressSpinnerModule,
@@ -54,7 +56,7 @@ import { AttendListComponent } from './attend/attend-list/attend-list.component'
     MatPaginatorModule,
     HttpClientModule
   ],
-  providers: [ ],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

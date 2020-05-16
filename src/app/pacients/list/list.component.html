@@ -6,9 +6,6 @@
       Nombre de Fármaco
     </div>
     <div class="content">
-      Contraindicaciones
-    </div>
-    <div class="content">
       Nombres comerciales
     </div>
     <div class="content">
@@ -17,7 +14,6 @@
   </div>
   <div *ngFor="let pacient of pacients" class="pacient">
     <div class="content">{{pacient.drugName}}</div>
-    <div class="content">{{pacient.contraindications}}</div>
     <div class="content">{{pacient.tradenames}}</div>
     <div class="content">
       <button mat-button [routerLink]="['/view', pacient.id]" routerLinkActive="router-link-active" >
@@ -30,4 +26,4 @@
     </div>
   </div>
 </div>
-<mat-paginator [length]="totalPacients" [pageSize]="itemsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator>
+<!-- <mat-paginator [length]="totalPacients" [pageSize]="itemsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator> -->
