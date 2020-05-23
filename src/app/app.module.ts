@@ -56,7 +56,7 @@ import { HttpConfigInterceptor } from './interceptor/httpconfig.iterceptor';
     MatPaginatorModule,
     HttpClientModule
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
