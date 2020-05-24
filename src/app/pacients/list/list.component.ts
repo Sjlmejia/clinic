@@ -11,10 +11,10 @@ import { PageEvent } from '@angular/material';
 export class ListComponent implements OnInit, OnDestroy {
   pacients: Pacient[] = [];
   isLoading = false;
-  totalPacients = 10;
-  itemsPerPage = 5;
+  totalPacients;
+  itemsPerPage = 10;
   currentPage = 1;
-  pageSizeOptions = [1, 5, 10];
+  pageSizeOptions = [1,10];
   private pacientsSub: Subscription;
 
   constructor(public pacientsService: PacientsService) {}
@@ -22,6 +22,10 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     this.pacientsService.getPacients(this.itemsPerPage, this.currentPage);
+    this.pacientsService.getCount().subscribe(res => {
+      console.log(res);
+      this.totalPacients = res['count'];
+    })
     this.pacientsSub = this.pacientsService.getPacientUpdateListener()
       .subscribe((pacients: Pacient[]) => {
         this.isLoading = false;

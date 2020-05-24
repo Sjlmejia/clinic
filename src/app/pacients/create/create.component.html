@@ -3,43 +3,137 @@
   </mat-spinner>
   <mat-card-title *ngIf="!isLoading">{{title}}</mat-card-title>
   <form [formGroup]="form" (submit) = "onSavePacient()" class="form" *ngIf="!isLoading">
-    <mat-form-field>
-      <input matInput placeholder="Nombres" formControlName="firstName" autocomplete="off">
-      <mat-error *ngIf="form.get('firstName').invalid">Por favor ingrese un Nombre</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Apellidos" formControlName="lastName" autocomplete="off">
-        <mat-error *ngIf="form.get('lastName').invalid">Por favor ingrese Apellidos</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Estatura" formControlName="heightPacient">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Peso" formControlName="weightPacient">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Sexo" formControlName="sexType">
-      <mat-error>Por Favor Ingrese el Sexo</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Grupo Sanguineo" formControlName="bloodType">
-    </mat-form-field>
-    <mat-form-field>
-     <input matInput placeholder="Cedula de Identidad" formControlName="dni">
-     <mat-error>Por Favor Ingrese la cédula de indentidad</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput  formControlName="date" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <div>
-      <button mat-stroked-button type="button" (click)="filePicker.click()">Cargar Imagen</button>
-      <input type="file" #filePicker  (change)="onImagePicked($event)">
+    <div class="container-card">
+      <mat-card class="block-information">
+        <mat-form-field>
+          <input matInput placeholder="Nombre del fármaco" formControlName="drugName" autocomplete="off">
+          <mat-error *ngIf="form.get('drugName').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Tipo de fármaco" formControlName="drugType" autocomplete="off">
+            <mat-error *ngIf="form.get('drugType').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Mecanismo de Acción" formControlName="mechanismOfAction" autocomplete="off">
+          <mat-error *ngIf="form.get('mechanismOfAction').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput placeholder="Indicaciones o espectro" formControlName="indicationsOrSpectrum" autocomplete="off"></textarea>
+            <mat-error *ngIf="form.get('indicationsOrSpectrum').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+      </mat-card>
+
+      <mat-card class="block-information">
+        <mat-form-field>
+          <textarea matInput placeholder="Formas Farmaceuticas" formControlName="formsPharmaceuticals" autocomplete="off"></textarea>
+          <mat-error *ngIf="form.get('formsPharmaceuticals').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+
+        <mat-card class="block-information">
+          <mat-card-subtitle>Dosis y vias de administración</mat-card-subtitle>
+          <mat-form-field>
+            <input matInput placeholder="Adultos" formControlName="adults" autocomplete="off">
+            <mat-error *ngIf="form.get('adults').invalid">Por favor llene este campo</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Niños" formControlName="children" autocomplete="off">
+              <mat-error *ngIf="form.get('children').invalid">Por favor llene este campo</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Ancianos" formControlName="elderly" autocomplete="off">
+            <mat-error *ngIf="form.get('elderly').invalid">Por favor llene este campo</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Insuficiencia renal" formControlName="kidneyFailure" autocomplete="off">
+              <mat-error *ngIf="form.get('kidneyFailure').invalid">Por favor llene este campo</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Insuficiencia hepática" formControlName="liverFailure" autocomplete="off">
+            <mat-error *ngIf="form.get('liverFailure').invalid">Por favor llene este campo</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Embarazo y lactancia" formControlName="pregnancyAndLactation" autocomplete="off">
+              <mat-error *ngIf="form.get('pregnancyAndLactation').invalid">Por favor llene este campo</mat-error>
+          </mat-form-field>
+        </mat-card>
+      </mat-card>
     </div>
-    <div class="image-preview"  *ngIf="imagePreview !== ''  && imagePreview && form.get('image').valid">
-      <img id="blah" [src]="imagePreview" alt="form.value.firstName" />
+
+    <div class="container-card">
+      <mat-card class="block-information">
+        <mat-card-subtitle>
+          Parámetros Farmacocinéticos (FC) y Farmacodinámicos (FD):
+        </mat-card-subtitle>
+        <mat-form-field>
+          <input matInput placeholder="Biodisponibilidad" formControlName="bioavailability" autocomplete="off">
+          <mat-error *ngIf="form.get('bioavailability').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Concentración máxima" formControlName="maximumConcentration" autocomplete="off">
+          <mat-error *ngIf="form.get('maximumConcentration').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Área bajo la curva" formControlName="areaDownCurve" autocomplete="off">
+          <mat-error *ngIf="form.get('areaDownCurve').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Vida media" formControlName="halfLife" autocomplete="off">
+          <mat-error *ngIf="form.get('halfLife').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Fijación a proteínas" formControlName="proteinBinding" autocomplete="off">
+          <mat-error *ngIf="form.get('proteinBinding').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Volumen de distribución" formControlName="volumeOfDistribution" autocomplete="off">
+          <mat-error *ngIf="form.get('volumeOfDistribution').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Metabolismo" formControlName="metabolism" autocomplete="off">
+          <mat-error *ngIf="form.get('metabolism').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Excreción" formControlName="excretion" autocomplete="off">
+          <mat-error *ngIf="form.get('excretion').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Difusión al SNC" formControlName="disseminationCNS" autocomplete="off">
+          <mat-error *ngIf="form.get('disseminationCNS').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Concentración intracelular" formControlName="intracellularConcetracion" autocomplete="off">
+          <mat-error *ngIf="form.get('intracellularConcetracion').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Relación FC/FD" formControlName="fcRatio" autocomplete="off">
+          <mat-error *ngIf="form.get('fcRatio').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+      </mat-card>
+
+      <mat-card class="block-information">
+        <mat-form-field>
+          <textarea matInput placeholder="Interacción con otros fármacos" formControlName="iterectaionDrugs" autocomplete="off"></textarea>
+          <mat-error *ngIf="form.get('iterectaionDrugs').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput placeholder="Efectos secundarios" formControlName="sideEffects" autocomplete="off"></textarea>
+          <mat-error *ngIf="form.get('sideEffects').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput placeholder="Contraindicaciones" formControlName="contraindications" autocomplete="off"></textarea>
+          <mat-error *ngIf="form.get('contraindications').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput placeholder="Nombres comerciales" formControlName="tradenames" autocomplete="off"></textarea>
+          <mat-error *ngIf="form.get('tradenames').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput placeholder="Comentarios" formControlName="comments" autocomplete="off"></textarea>
+          <mat-error *ngIf="form.get('comments').invalid">Por favor llene este campo</mat-error>
+        </mat-form-field>
+
+      </mat-card>
     </div>
-    <button class="save" mat-stroked-button type="submit">Guardar Paciente</button>
+    <button class="save" mat-stroked-button type="submit">Guardar Fármaco</button>
   </form>
 </mat-card>

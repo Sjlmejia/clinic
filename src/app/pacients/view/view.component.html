@@ -1,30 +1,142 @@
 <mat-card class="container">
-  <h2 *ngIf="!isLoading">Detalles del Paciente</h2>
+  <h2 *ngIf="!isLoading">Detalles del Fármaco</h2>
   <div>
     <mat-spinner *ngIf="isLoadingPacient"> </mat-spinner>
     <div *ngIf="!isLoadingPacient">
-      <div class="group">
-        <mat-label class="title">Nombres: </mat-label>
-        <mat-label class="label">{{ pacient.firstName }}</mat-label>
+      <div class="container-card">
+        <mat-card class="block-information">
+          <div class="group">
+            <mat-label class="title">Nombre del fármaco: </mat-label>
+            <mat-label class="label">{{ pacient.drugName }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Tipo de fármaco: </mat-label>
+            <mat-label class="label">{{ pacient.drugType }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Mecanismo de Acción: </mat-label>
+            <mat-label class="label">{{ pacient.mechanismOfAction }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Indicaciones o espectro: </mat-label>
+            <mat-label class="label">{{ pacient.indicationsOrSpectrum }}</mat-label>
+          </div>
+        </mat-card>
+
+        <mat-card class="block-information">
+          <div class="group">
+            <mat-label class="title">Formas Farmaceutica: </mat-label>
+            <mat-label class="label">{{ pacient.formsPharmaceuticals }}</mat-label>
+          </div>
+          <mat-card class="block-information">
+            <mat-card-subtitle> Dosis y vias de administración</mat-card-subtitle>
+            <div class="group">
+              <mat-label class="title">Adultos: </mat-label>
+              <mat-label class="label">{{ pacient.adults }}</mat-label>
+            </div>
+            <div class="group">
+              <mat-label class="title">Niños: </mat-label>
+              <mat-label class="label">{{ pacient.children }}</mat-label>
+            </div>
+            <div class="group">
+              <mat-label class="title">Ancianos: </mat-label>
+              <mat-label class="label">{{ pacient.elderly }}</mat-label>
+            </div>
+            <div class="group">
+              <mat-label class="title">Insuficiencia renal: </mat-label>
+              <mat-label class="label">{{ pacient.kidneyFailure }}</mat-label>
+            </div>
+            <div class="group">
+              <mat-label class="title">Insuficiencia hepática: </mat-label>
+              <mat-label class="label">{{ pacient.liverFailure }}</mat-label>
+            </div>
+            <div class="group">
+              <mat-label class="title">Embarazo y lactancia: </mat-label>
+              <mat-label class="label">{{ pacient.pregnancyAndLactation }}</mat-label>
+            </div>
+          </mat-card>
+        </mat-card>
       </div>
-      <div class="group">
-        <mat-label class="title">Apellidos: </mat-label>
-        <mat-label class="label">{{ pacient.lastName }}</mat-label>
+
+      <div class="container-card">
+        <mat-card class="block-information">
+          <mat-card-subtitle>
+            Parámetros Farmacocinéticos (FC) y Farmacodinámicos (FD):
+          </mat-card-subtitle>
+          <div class="group">
+            <mat-label class="title">Biodisponibilidad: </mat-label>
+            <mat-label class="label">{{ pacient.bioavailability }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Concentración máxima: </mat-label>
+            <mat-label class="label">{{ pacient.maximumConcentration }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Área bajo la curva: </mat-label>
+            <mat-label class="label">{{ pacient.areaDownCurve }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Vida media: </mat-label>
+            <mat-label class="label">{{ pacient.halfLife }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Fijación a proteínas: </mat-label>
+            <mat-label class="label">{{ pacient.proteinBinding }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Volumen de distribución: </mat-label>
+            <mat-label class="label">{{ pacient.volumeOfDistribution }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Metabolismo: </mat-label>
+            <mat-label class="label">{{ pacient.metabolism }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Excreción: </mat-label>
+            <mat-label class="label">{{ pacient.excretion }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">disseminationCNS: </mat-label>
+            <mat-label class="label">{{ pacient.disseminationCNS }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Difusión al SNC: </mat-label>
+            <mat-label class="label">{{ pacient.disseminationCNS }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Concentración intracelular: </mat-label>
+            <mat-label class="label">{{ pacient.intracellularConcetracion }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Relación FC/FD : </mat-label>
+            <mat-label class="label">{{ pacient.fcRatio }}</mat-label>
+          </div>
+        </mat-card>
+
+        <mat-card class="block-information">
+          <div class="group">
+            <mat-label class="title">Interacción con otros fármacos: </mat-label>
+            <mat-label class="label">{{ pacient.iterectaionDrugs }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Efectos secundarios: </mat-label>
+            <mat-label class="label">{{ pacient.sideEffects }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Contraindicaciones: </mat-label>
+            <mat-label class="label">{{ pacient.contraindications }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Nombres comerciales: </mat-label>
+            <mat-label class="label">{{ pacient.tradenames }}</mat-label>
+          </div>
+          <div class="group">
+            <mat-label class="title">Comentarios: </mat-label>
+            <mat-label class="label">{{ pacient.comments }}</mat-label>
+          </div>
+        </mat-card>
       </div>
-      <div class="group">
-        <div class="title">Foto:</div>
-        <img class="image" [src]="pacient.imagePath" />
-      </div>
-      <button
-        mat-stroked-button
-        [routerLink]="['/create-attend', id]"
-        routerLinkActive="router-link-active"
-      >
-        Nueva Consulta
-      </button>
+        
     </div>
-  </div>
-  <div *ngIf="!isLoading">
-    <app-attend-list [options]="attends"></app-attend-list>
   </div>
 </mat-card>
