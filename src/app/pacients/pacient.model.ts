@@ -27,5 +27,4 @@ export interface Pacient {
   tradenames: string;
   comments: string;
   formsPharmaceuticals: string;
-  management: string
 }

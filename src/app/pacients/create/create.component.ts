@@ -102,9 +102,6 @@ export  class CreateComponent implements OnInit {
       }),
       formsPharmaceuticals: new FormControl(null, {
         validators: [Validators.required]
-      }),
-      management: new FormControl(null, {
-        validators: [Validators.required]
       })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -143,8 +140,7 @@ export  class CreateComponent implements OnInit {
             contraindications: data.contraindications,
             tradenames: data.tradenames,
             comments: data.comments,
-            formsPharmaceuticals: data.formsPharmaceuticals,
-            management: data.management
+            formsPharmaceuticals: data.formsPharmaceuticals
           };
           console.log('hola', this.pacient);
           this.form.setValue({
@@ -175,7 +171,6 @@ export  class CreateComponent implements OnInit {
             tradenames: this.getValue(this.pacient.tradenames),
             comments: this.getValue(this.pacient.comments),
             formsPharmaceuticals: this.getValue(this.pacient.formsPharmaceuticals),
-            management: this.getValue(this.pacient.management),
           });
         });
       } else {
@@ -237,8 +232,7 @@ export  class CreateComponent implements OnInit {
         this.form.value.contraindications,
         this.form.value.tradenames,
         this.form.value.comments,
-        this.form.value.formsPharmaceuticals,
-        this.form.value.management
+        this.form.value.formsPharmaceuticals
         );
     } else {
       console.log('entro aqui');
@@ -270,8 +264,7 @@ export  class CreateComponent implements OnInit {
         this.form.value.contraindications,
         this.form.value.tradenames,
         this.form.value.comments,
-        this.form.value.formsPharmaceuticals,
-        this.form.value.management
+        this.form.value.formsPharmaceuticals
       );
     }
     this.form.reset();

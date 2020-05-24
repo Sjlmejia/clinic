@@ -55,8 +55,7 @@ router.post('', upload.single('image'), (req, res, next) => {
     contraindications: req.body.contraindications,
     tradenames: req.body.tradenames,
     comments: req.body.comments,
-    formsPharmaceuticals: req.body.formsPharmaceuticals,
-    management: req.body.management
+    formsPharmaceuticals: req.body.formsPharmaceuticals
   });
   pacient.save().then(data => {
     res.status(201).json({
@@ -103,8 +102,7 @@ router.put('/:id', upload.single('image'), (req, res, next) => {
     contraindications: req.body.contraindications,
     tradenames: req.body.tradenames,
     comments: req.body.comments,
-    formsPharmaceuticals: req.body.formsPharmaceuticals,
-    management: req.body.management
+    formsPharmaceuticals: req.body.formsPharmaceuticals
   });
   Pacient.updateOne({ _id: req.params.id }, pacient).then(respuest => {
     res.status(200).json({message: 'Actualizado'});
@@ -128,6 +126,13 @@ router.get('', (req, res, next) => {
   });
 });
 
+router.get('/count', (req, res, next) => {
+  Pacient.count({}).then(result => {
+    res.status(200).json({
+      count: result
+    })
+  });
+});
 router.get('/:id', (req, res, next) => {
   Pacient.findById(req.params.id).then(pacient => {
     if (pacient) {

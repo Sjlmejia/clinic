@@ -16,7 +16,7 @@ export class PacientsService {
   getPacients(itemsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${itemsPerPage}&page=${currentPage}`;
     this.http.get<{message: string, pacients: any}>(
-      environment.baseUrl+'/api/pacients')
+      environment.baseUrl+'/api/pacients' + queryParams)
       .pipe(map((pacientsData) => {
         return pacientsData.pacients.map(pacient => {
           return {
@@ -88,8 +88,6 @@ export class PacientsService {
     tradenames: string,
     comments: string,
     formsPharmaceuticals: string,
-    management: string,
-    
     ) {
     console.log('entro aquisave');
     const pacientData = new FormData();
@@ -120,7 +118,6 @@ export class PacientsService {
     pacientData.append('tradenames', tradenames);
     pacientData.append('comments', comments);
     pacientData.append('formsPharmaceuticals', formsPharmaceuticals);
-    pacientData.append('management', management);
 
     this.http.post<{message: string, pacient: Pacient}>(
       environment.baseUrl+'/api/pacients',
@@ -155,8 +152,7 @@ export class PacientsService {
           contraindications,
           tradenames,
           comments,
-          formsPharmaceuticals,
-          management
+          formsPharmaceuticals
         };
         this.pacients.push(pacient);
         this.pacientsUpdated.next([...this.pacients]);
@@ -193,8 +189,11 @@ export class PacientsService {
     tradenames: string;
     comments: string;
     formsPharmaceuticals: string,
-    management: string,
   }>( environment.baseUrl+ '/api/pacients/' + id );
+  }
+
+  getCount() {
+    return this.http.get(environment.baseUrl+'/api/pacients/count')
   }
 
   updatePacient( id: string,
@@ -224,8 +223,7 @@ export class PacientsService {
     contraindications: string,
     tradenames: string,
     comments: string,
-    formsPharmaceuticals: string,
-    management: string
+    formsPharmaceuticals: string
                  ) {
     let pacientData: Pacient | FormData;
     pacientData = {
@@ -256,8 +254,7 @@ export class PacientsService {
         contraindications,
         tradenames,
         comments,
-        formsPharmaceuticals,
-        management
+        formsPharmaceuticals
     };
       this.http
       .put(environment.baseUrl+'/api/pacients/' + id, pacientData)
@@ -292,8 +289,7 @@ export class PacientsService {
             contraindications,
             tradenames,
             comments,
-            formsPharmaceuticals,
-            management
+            formsPharmaceuticals
           };
           updatePacients[oldPacientIndex] = pacient;
           this.pacients = updatePacients;

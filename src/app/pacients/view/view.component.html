@@ -22,47 +22,46 @@
             <mat-label class="label">{{ pacient.indicationsOrSpectrum }}</mat-label>
           </div>
         </mat-card>
-  
+
         <mat-card class="block-information">
           <div class="group">
             <mat-label class="title">Formas Farmaceutica: </mat-label>
             <mat-label class="label">{{ pacient.formsPharmaceuticals }}</mat-label>
           </div>
-          <div class="group">
-            <mat-label class="title">Dosis y vias de administración: </mat-label>
-            <mat-label class="label">{{ pacient.management }}</mat-label>
-          </div>
-          <div class="group">
-            <mat-label class="title">Adultos: </mat-label>
-            <mat-label class="label">{{ pacient.adults }}</mat-label>
-          </div>
-          <div class="group">
-            <mat-label class="title">Niños: </mat-label>
-            <mat-label class="label">{{ pacient.children }}</mat-label>
-          </div>
-          <div class="group">
-            <mat-label class="title">Ancianos: </mat-label>
-            <mat-label class="label">{{ pacient.elderly }}</mat-label>
-          </div>
-          <div class="group">
-            <mat-label class="title">Insuficiencia renal: </mat-label>
-            <mat-label class="label">{{ pacient.kidneyFailure }}</mat-label>
-          </div>
-          <div class="group">
-            <mat-label class="title">Insuficiencia hepática: </mat-label>
-            <mat-label class="label">{{ pacient.liverFailure }}</mat-label>
-          </div>
-          <div class="group">
-            <mat-label class="title">Embarazo y lactancia: </mat-label>
-            <mat-label class="label">{{ pacient.pregnancyAndLactation }}</mat-label>
-          </div>
+          <mat-card class="block-information">
+            <mat-card-subtitle> Dosis y vias de administración</mat-card-subtitle>
+            <div class="group">
+              <mat-label class="title">Adultos: </mat-label>
+              <mat-label class="label">{{ pacient.adults }}</mat-label>
+            </div>
+            <div class="group">
+              <mat-label class="title">Niños: </mat-label>
+              <mat-label class="label">{{ pacient.children }}</mat-label>
+            </div>
+            <div class="group">
+              <mat-label class="title">Ancianos: </mat-label>
+              <mat-label class="label">{{ pacient.elderly }}</mat-label>
+            </div>
+            <div class="group">
+              <mat-label class="title">Insuficiencia renal: </mat-label>
+              <mat-label class="label">{{ pacient.kidneyFailure }}</mat-label>
+            </div>
+            <div class="group">
+              <mat-label class="title">Insuficiencia hepática: </mat-label>
+              <mat-label class="label">{{ pacient.liverFailure }}</mat-label>
+            </div>
+            <div class="group">
+              <mat-label class="title">Embarazo y lactancia: </mat-label>
+              <mat-label class="label">{{ pacient.pregnancyAndLactation }}</mat-label>
+            </div>
+          </mat-card>
         </mat-card>
       </div>
 
       <div class="container-card">
         <mat-card class="block-information">
           <mat-card-subtitle>
-            Parámetros Farmacocinéticos (FC) y Farmacodinámicos (FD): 
+            Parámetros Farmacocinéticos (FC) y Farmacodinámicos (FD):
           </mat-card-subtitle>
           <div class="group">
             <mat-label class="title">Biodisponibilidad: </mat-label>

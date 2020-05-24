@@ -28,8 +28,7 @@ const pacientSchema = new mongoose.Schema(
     contraindications: {type: String, required: true},
     tradenames: {type: String, required: true},
     comments: {type: String, required: true},
-    formsPharmaceuticals: {type: String, required: true},
-    management: {type: String, required: true}
+    formsPharmaceuticals: {type: String, required: true}
   });
 
 module.exports = mongoose.model('Pacient', pacientSchema);
